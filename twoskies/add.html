@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Two Skies: birth details</title>
+<style>
+  body { font: 17px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; max-width: 520px; margin: 0 auto; padding: 48px 24px; color: #17161C; background: #F3EEE6; text-align: center; }
+  h1 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; font-size: 2em; margin: .4em 0; }
+  img { width: 88px; height: 88px; border-radius: 20px; }
+  a.btn { display: block; margin: 28px 0 12px; padding: 16px; border-radius: 14px; background: #17161C; color: #F3EEE6; text-decoration: none; font-weight: 600; }
+  p.small { font-size: 14px; color: #8E877C; }
+  @media (prefers-color-scheme: dark) { body { background: #0D0F1C; color: #EFE8D8; } a.btn { background: #EFE8D8; color: #0D0F1C; } }
+</style>
+</head>
+<body>
+<img src="icon.png" alt="">
+<h1 id="t">Birth details for Two Skies</h1>
+<p id="d">Someone shared their birth details with you, so you can see your charts side by side.</p>
+<a class="btn" id="open" href="twoskies://add">Open in Two Skies</a>
+<p class="small">No Two Skies yet? Find "Two Skies" on the App Store, then open this link again.</p>
+<p class="small">The details are inside this link itself and never reach a server.</p>
+<script>
+  var h = location.hash.slice(1);
+  if (h) {
+    document.getElementById('open').href = 'twoskies://add#' + h;
+    try {
+      var s = h.replace(/-/g, '+').replace(/_/g, '/'); while (s.length % 4) s += '=';
+      var x = JSON.parse(decodeURIComponent(escape(atob(s))));
+      if (x.n) { document.getElementById('t').textContent = x.n + "'s birth details"; }
+    } catch (e) {}
+  }
+</script>
+</body>
+</html>
